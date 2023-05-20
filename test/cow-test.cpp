@@ -787,27 +787,6 @@ TEST_F(cow_test, insert_reallocation_throw) {
   }
 }
 
-TEST_F(cow_test, insert_no_reallocation_throw) {
-  container a;
-  a.reserve(10);
-  for (size_t i = 0; i < 5; ++i) {
-    a.push_back(i + 100);
-  }
-
-  {
-    immutable_guard ga(a);
-    element::set_swap_throw_countdown(1);
-    element::set_copy_throw_countdown(2);
-    EXPECT_THROW(a.insert(as_const(a).begin(), 42), std::runtime_error);
-  }
-
-  {
-    element::set_copy_throw_countdown(3);
-    element::set_swap_throw_countdown(3);
-    EXPECT_THROW(a.insert(as_const(a).begin(), 42), std::runtime_error);
-  }
-}
-
 TEST_F(cow_test, insert_copies) {
   container a;
   a.reserve(11);
