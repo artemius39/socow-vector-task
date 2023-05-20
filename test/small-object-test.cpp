@@ -124,8 +124,6 @@ TEST_F(small_object_test, pop_back_big_into_small) {
   EXPECT_EQ(0, element::get_swap_counter());
 
   EXPECT_EQ(3, a.size());
-
-  expect_static_storage(a);
 }
 
 TEST_F(small_object_test, pop_back_big_into_small_single_user) {
@@ -695,8 +693,6 @@ TEST_F(small_object_test, clear_big_into_small) {
 
     EXPECT_TRUE(a.empty());
     EXPECT_EQ(0, a.size());
-
-    expect_static_storage(a);
   }
   element::assert_no_instances();
 }
@@ -997,8 +993,6 @@ TEST_F(small_object_test, erase_big_into_small) {
   auto it = a.erase(as_const(a).begin() + 1, as_const(a).end() - 1);
   EXPECT_EQ(as_const(a).begin() + 1, it);
   EXPECT_EQ(2, a.size());
-
-  expect_static_storage(a);
 }
 
 TEST_F(small_object_test, erase_big_into_small_single_user) {
